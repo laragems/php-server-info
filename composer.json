@@ -2,6 +2,7 @@
     "name": "laragems/server-info",
     "description": "Library that detects server-related information.",
     "license": "MIT",
+    "version": "1.0.0-dev",
     "authors": [
         {
             "name": "Marius Puiu",
