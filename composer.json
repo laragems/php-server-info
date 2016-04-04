@@ -1,0 +1,17 @@
+{
+    "name": "laragems/server-info",
+    "description": "Library that detects server-related information.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marius Puiu",
+            "email": "puiumarius@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Laragems\\": "src/Laragems"
+        }
+    },
+    "require": {}
+}
