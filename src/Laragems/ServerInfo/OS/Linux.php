@@ -18,15 +18,12 @@ class Linux implements OSInterface
     private $kernelMinorVersion;
     private $kernelBuildVersion;
 
-    private $releaseOutput;
-    private $procVersion;
-
     function __construct()
     {
         $this->type = OSType::LINUX;
         $this->basicName = 'Linux';
 
-        $this->getRelease()->getProcVersion();
+        $this->processRelease()->processProcVersion();
     }
 
     public function getType()
@@ -81,14 +78,30 @@ class Linux implements OSInterface
 
     private function getRelease()
     {
-        $this->releaseOutput = ProcessWrapper::getOutput('cat /etc/*-release');
-
-        return $this;
+        return ProcessWrapper::getOutput('cat /etc/*-release');
     }
 
     private function getProcVersion()
     {
-        $this->procVersion = ProcessWrapper::getOutput('cat /proc/version');
+        return ProcessWrapper::getOutput('cat /proc/version');
+    }
+
+    private function processRelease()
+    {
+        if($output = $this->getRelease())
+        {
+            // TODO: process release information
+        }
+
+        return $this;
+    }
+
+    private function processProcVersion()
+    {
+        if($output = $this->getProcVersion())
+        {
+            // TODO: process proc version information
+        }
 
         return $this;
     }
