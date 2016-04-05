@@ -10,7 +10,13 @@ class Linux implements OSInterface
     private $type;
     private $basicName;
     private $osVersion;
+    private $osMajorVersion;
+    private $osMinorVersion;
+    private $osBuildVersion;
     private $kernelVersion;
+    private $kernelMajorVersion;
+    private $kernelMinorVersion;
+    private $kernelBuildVersion;
 
     private $releaseOutput;
     private $procVersion;
@@ -21,20 +27,6 @@ class Linux implements OSInterface
         $this->basicName = 'Linux';
 
         $this->getRelease()->getProcVersion();
-    }
-
-    private function getRelease()
-    {
-        $this->releaseOutput = ProcessWrapper::getOutput('cat /etc/*-release');
-
-        return $this;
-    }
-
-    private function getProcVersion()
-    {
-        $this->procVersion = ProcessWrapper::getOutput('cat /proc/version');
-
-        return $this;
     }
 
     public function getType()
@@ -52,8 +44,52 @@ class Linux implements OSInterface
         return $this->osVersion;
     }
 
+    public function getOSMajorVersion()
+    {
+        return $this->osMajorVersion;
+    }
+
+    public function getOSMinorVersion()
+    {
+        return $this->osMinorVersion;
+    }
+
+    public function getOSBuildVersion()
+    {
+        return $this->osBuildVersion;
+    }
+
     public function getKernelVersion()
     {
         return $this->kernelVersion;
+    }
+
+    public function getKernelMajorVersion()
+    {
+        return $this->kernelMajorVersion;
+    }
+
+    public function getKernelMinorVersion()
+    {
+        return $this->kernelMinorVersion;
+    }
+
+    public function getKernelBuildVersion()
+    {
+        return $this->kernelBuildVersion;
+    }
+
+    private function getRelease()
+    {
+        $this->releaseOutput = ProcessWrapper::getOutput('cat /etc/*-release');
+
+        return $this;
+    }
+
+    private function getProcVersion()
+    {
+        $this->procVersion = ProcessWrapper::getOutput('cat /proc/version');
+
+        return $this;
     }
 }

@@ -9,7 +9,13 @@ class WindowsNT implements OSInterface
     private $type;
     private $basicName;
     private $osVersion;
+    private $osMajorVersion;
+    private $osMinorVersion;
+    private $osBuildVersion;
     private $kernelVersion;
+    private $kernelMajorVersion;
+    private $kernelMinorVersion;
+    private $kernelBuildVersion;
 
     function __construct()
     {
@@ -32,8 +38,38 @@ class WindowsNT implements OSInterface
         return $this->osVersion;
     }
 
+    public function getOSMajorVersion()
+    {
+        return $this->osMajorVersion;
+    }
+
+    public function getOSMinorVersion()
+    {
+        return $this->osMinorVersion;
+    }
+
+    public function getOSBuildVersion()
+    {
+        return $this->osBuildVersion;
+    }
+
     public function getKernelVersion()
     {
         return $this->kernelVersion;
+    }
+
+    public function getKernelMajorVersion()
+    {
+        return $this->kernelMajorVersion;
+    }
+
+    public function getKernelMinorVersion()
+    {
+        return $this->kernelMinorVersion;
+    }
+
+    public function getKernelBuildVersion()
+    {
+        return $this->kernelBuildVersion;
     }
 }
