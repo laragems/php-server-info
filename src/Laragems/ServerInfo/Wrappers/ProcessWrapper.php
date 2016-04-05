@@ -1,11 +1,27 @@
 <?php
 
+/**
+ * Copyright Marius Puiu <puiumarius@gmail.com>
+ *
+ * MIT License https://opensource.org/licenses/MIT
+ */
+
 namespace Laragems\ServerInfo\Wrappers;
 
 use Symfony\Component\Process\Process;
 
+/**
+ * Class ProcessWrapper
+ * @package Laragems\ServerInfo\Wrappers
+ */
 class ProcessWrapper
 {
+    /**
+     * Get the output of the specified command
+     *
+     * @param $command string
+     * @return string|null
+     */
     public static function getOutput($command)
     {
         try
