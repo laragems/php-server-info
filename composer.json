@@ -1,5 +1,5 @@
 {
-    "name": "laragems/server-info",
+    "name": "laragems/php-server-info",
     "description": "Library that detects server-related information.",
     "license": "MIT",
     "version": "1.0.0-dev",
@@ -14,5 +14,7 @@
             "Laragems\\": "src/Laragems"
         }
     },
-    "require": {}
+    "require": {
+        "symfony/process": "^3.0"
+    }
 }

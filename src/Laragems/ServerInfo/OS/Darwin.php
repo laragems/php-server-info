@@ -2,18 +2,13 @@
 
 namespace Laragems\ServerInfo\OS;
 
-use Laragems\ServerInfo\Interfaces\OSInfoInterface;
+use Laragems\ServerInfo\Interfaces\OSInterface;
 
-class Darwin implements OSInfoInterface
+class Darwin extends BaseOS implements OSInterface
 {
-
-    public function getName()
+    function __construct()
     {
-        return 'MacOS';
-    }
-
-    public function getVersion()
-    {
-
+        $this->type = OSType::MACOS;
+        $this->name = 'MacOS';
     }
 }

@@ -6,7 +6,7 @@ use Laragems\ServerInfo\Exceptions\OSNotFoundException;
 
 class ServerInfo
 {
-    public static function get()
+    public static function getServer()
     {
         $osName = str_replace(' ', '', php_uname('s'));
         $className = "\\" . __NAMESPACE__ . "\\OS\\$osName";

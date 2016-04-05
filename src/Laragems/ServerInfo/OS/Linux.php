@@ -2,18 +2,13 @@
 
 namespace Laragems\ServerInfo\OS;
 
-use Laragems\ServerInfo\Interfaces\OSInfoInterface;
+use Laragems\ServerInfo\Interfaces\OSInterface;
 
-class Linux implements OSInfoInterface
+class Linux extends BaseOS implements OSInterface
 {
-
-    public function getName()
+    function __construct()
     {
-        return 'linux';
-    }
-
-    public function getVersion()
-    {
-
+        $this->type = OSType::LINUX;
+        $this->name = 'Linux';
     }
 }

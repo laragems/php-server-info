@@ -2,8 +2,10 @@
 
 namespace Laragems\ServerInfo\Interfaces;
 
-interface OSInfoInterface
+interface OSInterface
 {
+    public function getType();
+
     public function getName();
 
     public function getVersion();
