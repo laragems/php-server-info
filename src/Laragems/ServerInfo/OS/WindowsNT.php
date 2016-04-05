@@ -137,6 +137,7 @@ class WindowsNT implements OSInterface
         {
             $pattern = '/\d+\.\d+\.\d+/';
             preg_match($pattern, $output, $matches);
+            var_dump($matches);
         }
 
         return $this;
