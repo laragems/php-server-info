@@ -123,7 +123,7 @@ class WindowsNT implements OSInterface
      */
     private function getVersion()
     {
-        return ProcessWrapper::getOutput('ver.exe');
+        return ProcessWrapper::getOutput('wmic os get version');
     }
 
     /**
@@ -135,9 +135,7 @@ class WindowsNT implements OSInterface
     {
         if($output = $this->getVersion())
         {
-            $pattern = '/\d+\.\d+\.\d+/';
-            preg_match($pattern, $output, $matches);
-            var_dump($matches);
+            var_dump($output);
         }
 
         return $this;
