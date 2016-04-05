@@ -9,7 +9,7 @@
 namespace Laragems\ServerInfo\OS;
 
 use Laragems\ServerInfo\Interfaces\OSInterface;
-use Laragems\ServerInfo\Utils\ProcessWrapper;
+use Laragems\ServerInfo\Utils\ExecWrapper;
 
 /**
  * Class WindowsNT
@@ -117,17 +117,17 @@ class WindowsNT implements OSInterface
     }
 
     /**
-     * Get ver.exe version information
+     * Get version information
      *
      * @return null|string
      */
     private function getVersion()
     {
-        return ProcessWrapper::getOutput('wmic os get version');
+        return ExecWrapper::getOutput('wmic os get version /value');
     }
 
     /**
-     * Process ver.exe version information
+     * Process version information
      *
      * @return $this
      */
