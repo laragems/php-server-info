@@ -11,4 +11,24 @@ class WindowsNT extends BaseOS implements OSInterface
         $this->type = OSType::WINDOWS;
         $this->name = 'Windows';
     }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getBasicName()
+    {
+        return $this->basicName;
+    }
+
+    public function getOSVersion()
+    {
+        // TODO: Implement getOSVersion() method.
+    }
+
+    public function getKernelVersion()
+    {
+        // TODO: Implement getKernelVersion() method.
+    }
 }

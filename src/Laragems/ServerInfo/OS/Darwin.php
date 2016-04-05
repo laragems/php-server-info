@@ -9,6 +9,26 @@ class Darwin extends BaseOS implements OSInterface
     function __construct()
     {
         $this->type = OSType::MACOS;
-        $this->name = 'MacOS';
+        $this->basicName = 'MacOS';
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getBasicName()
+    {
+        return $this->basicName;
+    }
+
+    public function getOSVersion()
+    {
+        // TODO: Implement getOSVersion() method.
+    }
+
+    public function getKernelVersion()
+    {
+        // TODO: Implement getKernelVersion() method.
     }
 }
