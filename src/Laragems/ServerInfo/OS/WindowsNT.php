@@ -4,12 +4,17 @@ namespace Laragems\ServerInfo\OS;
 
 use Laragems\ServerInfo\Interfaces\OSInterface;
 
-class WindowsNT extends BaseOS implements OSInterface
+class WindowsNT implements OSInterface
 {
+    private $type;
+    private $basicName;
+    private $osVersion;
+    private $kernelVersion;
+
     function __construct()
     {
         $this->type = OSType::WINDOWS;
-        $this->name = 'Windows';
+        $this->basicName = 'Windows';
     }
 
     public function getType()
@@ -24,11 +29,11 @@ class WindowsNT extends BaseOS implements OSInterface
 
     public function getOSVersion()
     {
-        // TODO: Implement getOSVersion() method.
+        return $this->osVersion;
     }
 
     public function getKernelVersion()
     {
-        // TODO: Implement getKernelVersion() method.
+        return $this->kernelVersion;
     }
 }

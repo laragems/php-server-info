@@ -2,6 +2,7 @@
 
 namespace Laragems\ServerInfo\Wrappers;
 
+use Symfony\Component\Process\Process;
 
 class ProcessWrapper
 {

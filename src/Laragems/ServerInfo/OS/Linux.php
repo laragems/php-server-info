@@ -5,15 +5,20 @@ namespace Laragems\ServerInfo\OS;
 use Laragems\ServerInfo\Interfaces\OSInterface;
 use Laragems\ServerInfo\Wrappers\ProcessWrapper;
 
-class Linux extends BaseOS implements OSInterface
+class Linux implements OSInterface
 {
+    private $type;
+    private $basicName;
+    private $osVersion;
+    private $kernelVersion;
+
     private $releaseOutput;
     private $procVersion;
 
     function __construct()
     {
         $this->type = OSType::LINUX;
-        $this->name = 'Linux';
+        $this->basicName = 'Linux';
 
         $this->getRelease()->getProcVersion();
     }
@@ -44,11 +49,11 @@ class Linux extends BaseOS implements OSInterface
 
     public function getOSVersion()
     {
-        // TODO: Implement getOSVersion() method.
+        return $this->osVersion;
     }
 
     public function getKernelVersion()
     {
-        // TODO: Implement getKernelVersion() method.
+        return $this->kernelVersion;
     }
 }
