@@ -145,7 +145,8 @@ class Linux implements OSInterface
     {
         if($output = $this->getRelease())
         {
-            // TODO: process release information
+            $pattern = '/\d+\.\d+\.\d+/';
+            preg_match($pattern, $output, $matches);
         }
 
         return $this;
@@ -160,7 +161,8 @@ class Linux implements OSInterface
     {
         if($output = $this->getProcVersion())
         {
-            // TODO: process proc version information
+            $pattern = '/\d+\.\d+\.\d+/';
+            preg_match($pattern, $output, $matches);
         }
 
         return $this;

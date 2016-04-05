@@ -135,7 +135,8 @@ class WindowsNT implements OSInterface
     {
         if($output = $this->getVersion())
         {
-            // TODO: process ver.exe information
+            $pattern = '/\d+\.\d+\.\d+/';
+            preg_match($pattern, $output, $matches);
         }
 
         return $this;
