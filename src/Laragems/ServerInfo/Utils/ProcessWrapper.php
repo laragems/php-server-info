@@ -6,13 +6,13 @@
  * MIT License https://opensource.org/licenses/MIT
  */
 
-namespace Laragems\ServerInfo\Wrappers;
+namespace Laragems\ServerInfo\Utils;
 
 use Symfony\Component\Process\Process;
 
 /**
  * Class ProcessWrapper
- * @package Laragems\ServerInfo\Wrappers
+ * @package Laragems\ServerInfo\Utils
  */
 class ProcessWrapper
 {

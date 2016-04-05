@@ -9,7 +9,7 @@
 namespace Laragems\ServerInfo\OS;
 
 use Laragems\ServerInfo\Interfaces\OSInterface;
-use Laragems\ServerInfo\Wrappers\ProcessWrapper;
+use Laragems\ServerInfo\Utils\ProcessWrapper;
 
 /**
  * Class Linux
