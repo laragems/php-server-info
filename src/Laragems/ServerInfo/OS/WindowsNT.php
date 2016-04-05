@@ -135,7 +135,20 @@ class WindowsNT implements OSInterface
     {
         if($output = $this->getVersion())
         {
-            var_dump($output);
+            $output = str_ireplace('Version=', '', $output);
+
+            $version = explode('.', $output);
+
+            if(count($version) >= 2)
+            {
+                $this->osVersion = $output;
+
+                $this->osMajorVersion = $version[0];
+                $this->osMinorVersion = $version[1];
+
+                // Build number might not be available
+                $this->osBuildVersion = !empty($version[2]) ? $version[2] : null;
+            }
         }
 
         return $this;
