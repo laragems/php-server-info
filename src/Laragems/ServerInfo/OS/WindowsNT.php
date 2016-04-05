@@ -9,6 +9,7 @@
 namespace Laragems\ServerInfo\OS;
 
 use Laragems\ServerInfo\Interfaces\OSInterface;
+use Laragems\ServerInfo\Utils\ProcessWrapper;
 
 /**
  * Class WindowsNT
@@ -31,6 +32,8 @@ class WindowsNT implements OSInterface
     {
         $this->type = OSType::WINDOWS;
         $this->basicName = 'Windows';
+
+        $this->processVersion();
     }
 
     /**
@@ -111,5 +114,30 @@ class WindowsNT implements OSInterface
     public function getKernelBuildVersion()
     {
         return $this->kernelBuildVersion;
+    }
+
+    /**
+     * Get ver.exe version information
+     *
+     * @return null|string
+     */
+    private function getVersion()
+    {
+        return ProcessWrapper::getOutput('ver.exe');
+    }
+
+    /**
+     * Process ver.exe version information
+     *
+     * @return $this
+     */
+    private function processVersion()
+    {
+        if($output = $this->getVersion())
+        {
+            // TODO: process ver.exe information
+        }
+
+        return $this;
     }
 }
