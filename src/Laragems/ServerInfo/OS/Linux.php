@@ -155,7 +155,14 @@ class Linux implements OSInterface, UnixInterface
     {
         if($output = $this->getRelease())
         {
-            $pattern = '/^NAME="([A-Za-z0-9\s+]+)"/m';
+            /**
+             * Matches:
+             *
+             * "CentOS Linux" from: NAME="CentOS Linux"
+             * "Ubuntu" from: NAME="Ubuntu"
+             * "Debian GNU/Linux" from: NAME="Debian GNU/Linux"
+             */
+            $pattern = '/^NAME="([A-Za-z0-9/\s+]+)"/m';
             preg_match($pattern, $output, $matches);
 
             if(!empty($matches[1]))
@@ -176,6 +183,13 @@ class Linux implements OSInterface, UnixInterface
     {
         if($output = $this->getProcVersion())
         {
+            /**
+             * Matches:
+             *
+             * "3.16.0" from: Linux version 3.16.0-4-amd64 (debian-kernel@lists.debian.org) (gcc version 4.8.4 ...
+             * "4.2.0" from: Linux version 4.2.0-35-generic (buildd@lgw01-11) (gcc version 5.2.1 20151010 ...
+             * "3.10.0" from: Linux version 3.10.0-327.10.1.el7.x86_64 (builder@kbuilder.dev.centos.org) ...
+             */
             $pattern = '/Linux version\s+(\d+.\d+.\d+)/';
             preg_match($pattern, $output, $matches);
 
@@ -187,9 +201,7 @@ class Linux implements OSInterface, UnixInterface
 
                 $this->kernelMajorVersion = $version[0];
                 $this->kernelMinorVersion = $version[1];
-
-                // Build number might not be available
-                $this->kernelBuildVersion = isset($version[2]) ? $version[2] : null;
+                $this->kernelBuildVersion = $version[2];
             }
         }
 
