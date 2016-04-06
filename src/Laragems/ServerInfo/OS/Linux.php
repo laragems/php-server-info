@@ -155,9 +155,13 @@ class Linux implements OSInterface, UnixInterface
     {
         if($output = $this->getRelease())
         {
-            $pattern = '/\d+\.\d+\.\d+/';
+            $pattern = '/^NAME="([A-Za-z0-9\s+]+)"/m';
             preg_match($pattern, $output, $matches);
-            //var_dump($matches);
+
+            if(!empty($matches[1]))
+            {
+                $this->distributionName = $matches[1];
+            }
         }
 
         return $this;
@@ -172,14 +176,14 @@ class Linux implements OSInterface, UnixInterface
     {
         if($output = $this->getProcVersion())
         {
-            $pattern = '/(Linux version\s+)(\d+.\d+.\d+)/';
+            $pattern = '/Linux version\s+(\d+.\d+.\d+)/';
             preg_match($pattern, $output, $matches);
 
-            $version = explode('.', $matches[2]);
+            $version = explode('.', $matches[1]);
 
             if(count($version) >= 2)
             {
-                $this->kernelVersion = $matches[2];
+                $this->kernelVersion = $matches[1];
 
                 $this->kernelMajorVersion = $version[0];
                 $this->kernelMinorVersion = $version[1];

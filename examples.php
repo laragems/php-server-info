@@ -18,6 +18,7 @@ var_dump("OS Build Version: {$os->getOSBuildVersion()}");
 
 if($os instanceof UnixInterface)
 {
+    var_dump("Distribution Name: {$os->getDistributionName()}");
     var_dump("Kernel Version: {$os->getKernelVersion()}");
     var_dump("Kernel Major Version: {$os->getKernelMajorVersion()}");
     var_dump("Kernel Minor Version: {$os->getKernelMinorVersion()}");
