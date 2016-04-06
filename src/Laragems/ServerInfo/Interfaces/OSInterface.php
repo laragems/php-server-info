@@ -55,32 +55,4 @@ interface OSInterface
      * @return integer|null
      */
     public function getOSBuildVersion();
-
-    /**
-     * Get full version string of the Kernel
-     *
-     * @return integer
-     */
-    public function getKernelVersion();
-
-    /**
-     * Get major version number of the Kernel
-     *
-     * @return integer
-     */
-    public function getKernelMajorVersion();
-
-    /**
-     * Get minor version number of the Kernel
-     *
-     * @return integer
-     */
-    public function getKernelMinorVersion();
-
-    /**
-     * Get build version number of the Kernel
-     *
-     * @return integer|null
-     */
-    public function getKernelBuildVersion();
 }

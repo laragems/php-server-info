@@ -9,13 +9,14 @@
 namespace Laragems\ServerInfo\OS;
 
 use Laragems\ServerInfo\Interfaces\OSInterface;
+use Laragems\ServerInfo\Interfaces\WindowsInterface;
 use Laragems\ServerInfo\Utils\ExecWrapper;
 
 /**
  * Class WindowsNT
  * @package Laragems\ServerInfo\OS
  */
-class WindowsNT implements OSInterface
+class WindowsNT implements OSInterface, WindowsInterface
 {
     private $type;
     private $basicName;
@@ -23,10 +24,6 @@ class WindowsNT implements OSInterface
     private $osMajorVersion;
     private $osMinorVersion;
     private $osBuildVersion;
-    private $kernelVersion;
-    private $kernelMajorVersion;
-    private $kernelMinorVersion;
-    private $kernelBuildVersion;
 
     function __construct()
     {
@@ -85,38 +82,6 @@ class WindowsNT implements OSInterface
     }
 
     /**
-     * @inheritdoc
-     */
-    public function getKernelVersion()
-    {
-        return $this->kernelVersion;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getKernelMajorVersion()
-    {
-        return $this->kernelMajorVersion;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getKernelMinorVersion()
-    {
-        return $this->kernelMinorVersion;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getKernelBuildVersion()
-    {
-        return $this->kernelBuildVersion;
-    }
-
-    /**
      * Get version information
      *
      * @return null|string
@@ -135,7 +100,7 @@ class WindowsNT implements OSInterface
     {
         if($output = $this->getVersion())
         {
-            $output = str_ireplace('Version=', '', $output);
+            $output = trim(str_ireplace('Version=', '', $output));
 
             $version = explode('.', $output);
 

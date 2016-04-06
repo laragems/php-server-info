@@ -9,12 +9,13 @@
 namespace Laragems\ServerInfo\OS;
 
 use Laragems\ServerInfo\Interfaces\OSInterface;
+use Laragems\ServerInfo\Interfaces\UnixInterface;
 
 /**
  * Class Darwin
  * @package Laragems\ServerInfo\OS
  */
-class Darwin implements OSInterface
+class Darwin implements OSInterface, UnixInterface
 {
     private $type;
     private $basicName;
@@ -47,6 +48,14 @@ class Darwin implements OSInterface
     public function getBasicName()
     {
         return $this->basicName;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDistribution()
+    {
+        // TODO: Implement getDistribution() method.
     }
 
     /**

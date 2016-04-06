@@ -3,6 +3,7 @@
 require "vendor/autoload.php";
 
 use Laragems\ServerInfo\ServerInfo;
+use Laragems\ServerInfo\Interfaces\UnixInterface;
 
 /** @var \Laragems\ServerInfo\Interfaces\OSInterface $os */
 $os = ServerInfo::getServer();
@@ -15,7 +16,10 @@ var_dump("OS Major Version: {$os->getOSMajorVersion()}");
 var_dump("OS Minor Version: {$os->getOSMinorVersion()}");
 var_dump("OS Build Version: {$os->getOSBuildVersion()}");
 
-var_dump("Kernel Version: {$os->getKernelVersion()}");
-var_dump("Kernel Major Version: {$os->getKernelMajorVersion()}");
-var_dump("Kernel Minor Version: {$os->getKernelMinorVersion()}");
-var_dump("Kernel Build Version: {$os->getKernelBuildVersion()}");
+if($os instanceof UnixInterface)
+{
+    var_dump("Kernel Version: {$os->getKernelVersion()}");
+    var_dump("Kernel Major Version: {$os->getKernelMajorVersion()}");
+    var_dump("Kernel Minor Version: {$os->getKernelMinorVersion()}");
+    var_dump("Kernel Build Version: {$os->getKernelBuildVersion()}");
+}

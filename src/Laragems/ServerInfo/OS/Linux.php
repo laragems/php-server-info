@@ -9,13 +9,14 @@
 namespace Laragems\ServerInfo\OS;
 
 use Laragems\ServerInfo\Interfaces\OSInterface;
+use Laragems\ServerInfo\Interfaces\UnixInterface;
 use Laragems\ServerInfo\Utils\ProcessWrapper;
 
 /**
  * Class Linux
  * @package Laragems\ServerInfo\OS
  */
-class Linux implements OSInterface
+class Linux implements OSInterface, UnixInterface
 {
     private $type;
     private $basicName;
@@ -50,6 +51,14 @@ class Linux implements OSInterface
     public function getBasicName()
     {
         return $this->basicName;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDistribution()
+    {
+        // TODO: Implement getDistribution() method.
     }
 
     /**
