@@ -20,6 +20,7 @@ class Linux implements OSInterface, UnixInterface
 {
     private $type;
     private $basicName;
+    private $distributionName;
     private $osVersion;
     private $osMajorVersion;
     private $osMinorVersion;
@@ -56,9 +57,9 @@ class Linux implements OSInterface, UnixInterface
     /**
      * @inheritdoc
      */
-    public function getDistribution()
+    public function getDistributionName()
     {
-        // TODO: Implement getDistribution() method.
+        return $this->distributionName;
     }
 
     /**
@@ -156,7 +157,7 @@ class Linux implements OSInterface, UnixInterface
         {
             $pattern = '/\d+\.\d+\.\d+/';
             preg_match($pattern, $output, $matches);
-            var_dump($matches);
+            //var_dump($matches);
         }
 
         return $this;
@@ -171,9 +172,21 @@ class Linux implements OSInterface, UnixInterface
     {
         if($output = $this->getProcVersion())
         {
-            $pattern = '/\d+\.\d+\.\d+/';
+            $pattern = '/(Linux version\s+)(\d+.\d+.\d+)/';
             preg_match($pattern, $output, $matches);
-            var_dump($matches);
+
+            $version = explode('.', $matches[2]);
+
+            if(count($version) >= 2)
+            {
+                $this->kernelVersion = $matches[2];
+
+                $this->kernelMajorVersion = $version[0];
+                $this->kernelMinorVersion = $version[1];
+
+                // Build number might not be available
+                $this->kernelBuildVersion = isset($version[2]) ? $version[2] : null;
+            }
         }
 
         return $this;

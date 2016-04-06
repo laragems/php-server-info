@@ -19,7 +19,7 @@ interface UnixInterface
      *
      * @return string
      */
-    public function getDistribution();
+    public function getDistributionName();
 
     /**
      * Get full version string of the Kernel

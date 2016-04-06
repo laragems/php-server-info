@@ -112,7 +112,7 @@ class WindowsNT implements OSInterface, WindowsInterface
                 $this->osMinorVersion = $version[1];
 
                 // Build number might not be available
-                $this->osBuildVersion = !empty($version[2]) ? $version[2] : null;
+                $this->osBuildVersion = isset($version[2]) ? $version[2] : null;
             }
         }
 
