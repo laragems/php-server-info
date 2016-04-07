@@ -172,6 +172,7 @@ class Linux implements OSInterface, UnixInterface
      */
     private function process()
     {
+        //$this->processFallback();
         $json = $this->getReleaseScriptJSON();
 
         if(!empty($json) && $data = json_decode($json, true))
@@ -195,6 +196,17 @@ class Linux implements OSInterface, UnixInterface
     }
 
     /**
+     * Some distros might contain suffixes in their release name. This function removes them
+     *
+     * @param $distroName string
+     * @return string
+     */
+    private function removeSuffixes($distroName)
+    {
+        return str_replace(array(' Linux', ' GNU/Linux'), '' , $distroName);
+    }
+
+    /**
      * Fallback function. This function processes /etc/*-release and /proc/version files contents
      *
      * @return bool
@@ -208,17 +220,21 @@ class Linux implements OSInterface, UnixInterface
             /**
              * Matches:
              *
-             * "CentOS Linux" from: NAME="CentOS Linux"
+             * "CentOS" from: NAME="CentOS Linux"
              * "Ubuntu" from: NAME="Ubuntu"
              * "Debian GNU/Linux" from: NAME="Debian GNU/Linux"
              */
-            $pattern = '/^NAME="([A-Za-z0-9/\s+]+)"/m';
-            preg_match($pattern, $output, $matches);
+            $pattern = '/^NAME="([A-Za-z0-9\/\s+]+)"/m';
+            preg_match($pattern, 'NAME="CentOS Linux"', $matches);
+
+            //preg_match($pattern, 'NAME="CentOS Linux"', $matches1);
+            //preg_match($pattern, 'NAME="Ubuntu"', $matches2);
+            //preg_match($pattern, 'NAME="Debian GNU/Linux"', $matches3);
+            //print_r([$matches1, $matches2, $matches3]);die;
 
             if(!empty($matches[1]))
             {
-                // Some distros might contain the word "Linux" in their release name - which is redundant here
-                $this->distributionName = str_replace(' Linux', '' , $matches[1]);
+                $this->distributionName = $this->removeSuffixes($matches[1]);
             }
         }
 
