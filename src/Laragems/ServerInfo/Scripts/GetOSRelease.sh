@@ -49,13 +49,13 @@ JSON="{
     \"os\": \"${OS}\",
     \"dist\": \"${DIST}\",
     \"os_version\": \"${OS_VERSION}\",
-    \"os_major_version\": \"${OS_MAJOR_VERSION}\",
-    \"os_minor_version\": \"${OS_MINOR_VERSION}\",
-    \"os_build_version\": \"${OS_BUILD_VERSION}\",
+    \"os_major_version\": ${OS_MAJOR_VERSION},
+    \"os_minor_version\": ${OS_MINOR_VERSION},
+    \"os_build_version\": ${OS_BUILD_VERSION},
     \"kernel_version\": \"${KERNEL_VERSION}\",
-    \"kernel_major_version\": \"${KERNEL_MAJOR_VERSION}\",
-    \"kernel_minor_version\": \"${KERNEL_MINOR_VERSION}\",
-    \"kernel_build_version\": \"${KERNEL_BUILD_VERSION}\",
+    \"kernel_major_version\": ${KERNEL_MAJOR_VERSION},
+    \"kernel_minor_version\": ${KERNEL_MINOR_VERSION},
+    \"kernel_build_version\": ${KERNEL_BUILD_VERSION},
     \"arch\": \"${ARCH}\"
 }"
 

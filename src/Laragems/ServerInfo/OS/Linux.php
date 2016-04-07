@@ -29,13 +29,14 @@ class Linux implements OSInterface, UnixInterface
     private $kernelMajorVersion;
     private $kernelMinorVersion;
     private $kernelBuildVersion;
+    private $architecture;
 
     function __construct()
     {
         $this->type = OSType::LINUX;
         $this->basicName = 'Linux';
 
-        $this->processRelease()->processProcVersion();
+        $this->process();
     }
 
     /**
@@ -127,7 +128,25 @@ class Linux implements OSInterface, UnixInterface
     }
 
     /**
-     * Get /etc/*-release files contents
+     * @inheritdoc
+     */
+    public function getArchitecture()
+    {
+        return $this->architecture;
+    }
+
+    /**
+     * Get Scripts/GetOSRelease.sh JSON info
+     *
+     * @return null|string
+     */
+    private function getReleaseScriptJSON()
+    {
+        return ProcessWrapper::getOutput('sh ' . dirname(__FILE__) . '/../Scripts/GetOSRelease.sh');
+    }
+
+    /**
+     * Get /etc/*-release info
      *
      * @return null|string
      */
@@ -147,12 +166,43 @@ class Linux implements OSInterface, UnixInterface
     }
 
     /**
-     * Process /etc/*-release files contents
+     * Process Linux info
      *
-     * @return $this
+     * @return bool
      */
-    private function processRelease()
+    private function process()
     {
+        $json = $this->getReleaseScriptJSON();
+
+        if(!empty($json) && $data = json_decode($json, true))
+        {
+            $this->distributionName = !empty($data['dist']) ? $data['dist'] : null;
+
+            $this->osVersion = !empty($data['os_version']) ? $data['os_version'] : null;
+            $this->osMajorVersion = isset($data['os_major_version']) ? intval($data['os_major_version']) : null;
+            $this->osMinorVersion = isset($data['os_minor_version']) ? intval($data['os_minor_version']) : null;
+            $this->osBuildVersion = isset($data['os_build_version']) ? intval($data['os_build_version']) : null;
+
+            $this->kernelVersion = !empty($data['kernel_version']) ? $data['kernel_version'] : null;
+            $this->kernelMajorVersion = isset($data['kernel_major_version']) ? intval($data['kernel_major_version']) : null;
+            $this->kernelMinorVersion = isset($data['kernel_minor_version']) ? intval($data['kernel_minor_version']) : null;
+            $this->kernelBuildVersion = isset($data['kernel_build_version']) ? intval($data['kernel_build_version']) : null;
+
+            return true;
+        }
+
+        return $this->processFallback();
+    }
+
+    /**
+     * Fallback function. This function processes /etc/*-release and /proc/version files contents
+     *
+     * @return bool
+     */
+    private function processFallback()
+    {
+        // TODO: process more info
+
         if($output = $this->getRelease())
         {
             /**
@@ -167,20 +217,11 @@ class Linux implements OSInterface, UnixInterface
 
             if(!empty($matches[1]))
             {
-                $this->distributionName = $matches[1];
+                // Some distros might contain the word "Linux" in their release name - which is redundant here
+                $this->distributionName = str_replace(' Linux', '' , $matches[1]);
             }
         }
 
-        return $this;
-    }
-
-    /**
-     * Process /proc/version file contents
-     *
-     * @return $this
-     */
-    private function processProcVersion()
-    {
         if($output = $this->getProcVersion())
         {
             /**
@@ -205,6 +246,6 @@ class Linux implements OSInterface, UnixInterface
             }
         }
 
-        return $this;
+        return true;
     }
 }

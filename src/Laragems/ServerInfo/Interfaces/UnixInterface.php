@@ -48,4 +48,9 @@ interface UnixInterface
      * @return integer|null
      */
     public function getKernelBuildVersion();
+
+    /**
+     * @return string
+     */
+    public function getArchitecture();
 }
